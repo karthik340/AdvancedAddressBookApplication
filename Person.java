@@ -1,4 +1,4 @@
-public class Person {
+public class Person implements Comparable<Person>{
 
     private String firstName;
     private String lastName;
@@ -16,6 +16,9 @@ public class Person {
         this.state=state;
         this.zip=zip;
         this.phoneNumber=phoneNumber;
+    }
+    public int compareTo(Person person){
+        return this.firstName.compareTo(person.firstName);
     }
     public void setFirstName(String firstName) {
         this.firstName = firstName;

@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -113,7 +114,9 @@ public class AddressBookMain {
             System.out.println("enter 1 for adding person to address book");
             System.out.println("enter 2 for editing person");
             System.out.println("enter 3 for deleting a person");
-            System.out.println("enter 4 to quit");
+            System.out.println("enter 4 to display Address book");
+            System.out.println("ener 5 to sort address book by name");
+            System.out.println("enter 6 to quit");
             int option=input.nextInt();
             input.nextLine();
             switch (option) {
@@ -129,6 +132,12 @@ public class AddressBookMain {
                     addressBook.deletePerson();
                     break;
                 case 4:
+                    addressBook.displayAddressBook();
+                    break;
+                case 5:
+                    Collections.sort(addressBook.personsList);
+                    break;
+                case 6:
                     quit=true;
                     break;
             }
