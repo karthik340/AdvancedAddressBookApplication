@@ -1,6 +1,30 @@
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+
+class sortByCity implements Comparator<Person> {
+    public int compare(Person person1,Person person2)
+    {
+        return person1.getCity().compareTo(person2.getCity());
+    }
+}
+
+class sortByState implements Comparator<Person> {
+    public int compare(Person person1,Person person2)
+    {
+        return person1.getState().compareTo(person2.getState());
+    }
+}
+
+class sortByZip implements Comparator<Person> {
+    public int compare(Person person1,Person person2)
+    {
+        return person1.getZip().compareTo(person2.getZip());
+    }
+}
+
 
 public class AddressBookMain {
 
@@ -116,7 +140,10 @@ public class AddressBookMain {
             System.out.println("enter 3 for deleting a person");
             System.out.println("enter 4 to display Address book");
             System.out.println("ener 5 to sort address book by name");
-            System.out.println("enter 6 to quit");
+            System.out.println("ener 6 to sort address book by city");
+            System.out.println("ener 7 to sort address book by state");
+            System.out.println("ener 8 to sort address book by zip");
+            System.out.println("enter 9 to quit");
             int option=input.nextInt();
             input.nextLine();
             switch (option) {
@@ -138,6 +165,15 @@ public class AddressBookMain {
                     Collections.sort(addressBook.personsList);
                     break;
                 case 6:
+                    Collections.sort(addressBook.personsList,new sortByCity());
+                    break;
+                case 7:
+                    Collections.sort(addressBook.personsList,new sortByState());
+                    break;
+                case 8:
+                    Collections.sort(addressBook.personsList,new sortByZip());
+                    break;
+                case 9:
                     quit=true;
                     break;
             }
