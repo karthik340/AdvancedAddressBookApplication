@@ -105,7 +105,7 @@ public class AddressBookMain {
         do{
             System.out.println("enter 1 for adding person to address book");
             System.out.println("enter 2 for editing person");
-            System.out.println("enter 3 for deleting person");
+            System.out.println("enter 3 for deleting a person");
             System.out.println("enter 4 to quit");
             int option=input.nextInt();
             input.nextLine();
