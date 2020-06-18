@@ -1,7 +1,4 @@
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 
 class sortByCity implements Comparator<Person> {
@@ -28,8 +25,16 @@ class sortByZip implements Comparator<Person> {
 
 public class AddressBookMain {
 
-    private final LinkedList<Person>personsList=new LinkedList<>();
+    private final HashMap<String,Person>cityMap;
+    private final HashMap<String,Person>stateMap;
+    private final LinkedList<Person>personsList;
     private static final Scanner input=new Scanner(System.in);
+    AddressBookMain()
+    {
+        cityMap=new HashMap<>();
+        stateMap=new HashMap<>();
+        personsList=new LinkedList<>();
+    }
     public void addPerson()
     {
         System.out.println("enter first name");
@@ -54,6 +59,8 @@ public class AddressBookMain {
             return;
         }
         personsList.add(person1);
+        cityMap.put(city,person1);
+        stateMap.put(state,person1);
     }
     public Person getObjectWithName(String firstName)
     {
@@ -130,6 +137,19 @@ public class AddressBookMain {
         personsList.remove(personToDelete);
     }
 
+    public void viewPersonByCity()
+    {
+        System.out.println("enter city");
+        String city=input.nextLine();
+        System.out.println(cityMap.get(city));
+    }
+    public void viewPersonByState()
+    {
+        System.out.println("enter state");
+        String state=input.nextLine();
+        System.out.println(stateMap.get(state));
+    }
+
     public static void main(String[] args)
     {
         boolean quit=false;
@@ -143,7 +163,9 @@ public class AddressBookMain {
             System.out.println("ener 6 to sort address book by city");
             System.out.println("ener 7 to sort address book by state");
             System.out.println("ener 8 to sort address book by zip");
-            System.out.println("enter 9 to quit");
+            System.out.println("ener 9 to view person by city");
+            System.out.println("ener 10 to view person by state");
+            System.out.println("enter 11 to quit");
             int option=input.nextInt();
             input.nextLine();
             switch (option) {
@@ -174,6 +196,12 @@ public class AddressBookMain {
                     Collections.sort(addressBook.personsList,new sortByZip());
                     break;
                 case 9:
+                    addressBook.viewPersonByCity();
+                    break;
+                case 10:
+                    addressBook.viewPersonByState();
+                    break;
+                case 11:
                     quit=true;
                     break;
             }
