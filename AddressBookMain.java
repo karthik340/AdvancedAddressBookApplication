@@ -22,12 +22,16 @@ public class AddressBookMain {
         System.out.println("enter phone number");
         String phoneNumber=input.nextLine();
         Person person1 = new Person(firstName,lastName,address,city,state,zip,phoneNumber);
+        Person duplicate=getObjectWithName(firstName);
+        if(person1.equals(duplicate))
+        {
+            System.out.println("there already exists person  with same name in address book");
+            return;
+        }
         personsList.add(person1);
     }
-    public Person getObjectWithName()
+    public Person getObjectWithName(String firstName)
     {
-        System.out.println("enter first name of person ");
-        String firstName=input.nextLine();
         for(Person person:personsList)
         {
             if(person.getFirstName().equals(firstName))
@@ -35,12 +39,13 @@ public class AddressBookMain {
                 return person;
             }
         }
-        return null;
+        return new Person("","","","","","","");
     }
     public void editperson()
     {
-        Person personToEdit=getObjectWithName();
-
+        System.out.println("enter first name of person ");
+        String firstName=input.nextLine();
+        Person personToEdit=getObjectWithName(firstName);
         boolean quit=false;
         do{
             System.out.println("enter 1 for editing address");
@@ -94,7 +99,9 @@ public class AddressBookMain {
 
     public void deletePerson()
     {
-        Person personToDelete=getObjectWithName();
+        System.out.println("enter first name of person ");
+        String firstName=input.nextLine();
+        Person personToDelete=getObjectWithName(firstName);
         personsList.remove(personToDelete);
     }
 

@@ -77,4 +77,10 @@ public class Person {
     {
         return firstName+", "+lastName+", "+address+", "+city+", "+state+", "+zip+", "+phoneNumber;
     }
+
+    public boolean equals(Person obj)
+    {
+        return this.firstName.equals(obj.firstName);
+    }
+
 }
