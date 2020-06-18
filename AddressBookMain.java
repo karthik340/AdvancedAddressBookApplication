@@ -24,19 +24,23 @@ public class AddressBookMain {
         Person person1 = new Person(firstName,lastName,address,city,state,zip,phoneNumber);
         personsList.add(person1);
     }
-
-    public void editperson()
+    public Person getObjectWithName()
     {
-        Person personToEdit=new Person("","","","","","","");
-        System.out.println("enter first name of person to edit");
+        System.out.println("enter first name of person ");
         String firstName=input.nextLine();
         for(Person person:personsList)
         {
             if(person.getFirstName().equals(firstName))
             {
-                personToEdit=person;
+                return person;
             }
         }
+        return null;
+    }
+    public void editperson()
+    {
+        Person personToEdit=getObjectWithName();
+
         boolean quit=false;
         do{
             System.out.println("enter 1 for editing address");
@@ -88,6 +92,12 @@ public class AddressBookMain {
         }
     }
 
+    public void deletePerson()
+    {
+        Person personToDelete=getObjectWithName();
+        personsList.remove(personToDelete);
+    }
+
     public static void main(String[] args)
     {
         boolean quit=false;
@@ -95,7 +105,8 @@ public class AddressBookMain {
         do{
             System.out.println("enter 1 for adding person to address book");
             System.out.println("enter 2 for editing person");
-            System.out.println("enter 3 to quit");
+            System.out.println("enter 3 for deleting person");
+            System.out.println("enter 4 to quit");
             int option=input.nextInt();
             input.nextLine();
             switch (option) {
@@ -107,6 +118,10 @@ public class AddressBookMain {
                     addressBook.editperson();
                     break;
                 case 3:
+                    addressBook.displayAddressBook();
+                    addressBook.deletePerson();
+                    break;
+                case 4:
                     quit=true;
                     break;
             }
