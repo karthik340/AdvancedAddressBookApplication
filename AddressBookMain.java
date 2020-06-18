@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -25,8 +26,8 @@ class sortByZip implements Comparator<Person> {
 
 public class AddressBookMain {
 
-    private final HashMap<String,Person>cityMap;
-    private final HashMap<String,Person>stateMap;
+    private final HashMap<String,ArrayList<Person>>cityMap;
+    private final HashMap<String,ArrayList<Person>>stateMap;
     private final LinkedList<Person>personsList;
     private static final Scanner input=new Scanner(System.in);
     AddressBookMain()
@@ -59,9 +60,13 @@ public class AddressBookMain {
             return;
         }
         personsList.add(person1);
-        cityMap.put(city,person1);
-        stateMap.put(state,person1);
+        addValues(cityMap,city,person1);
+        addValues(stateMap,state,person1);
     }
+
+
+
+
     public Person getObjectWithName(String firstName)
     {
         for(Person person:personsList)
@@ -73,6 +78,11 @@ public class AddressBookMain {
         }
         return new Person("","","","","","","");
     }
+
+
+
+
+
     public void editperson()
     {
         System.out.println("enter first name of person ");
@@ -122,12 +132,15 @@ public class AddressBookMain {
         }while(!quit);
 
     }
+
+
     public void displayAddressBook()
     {
         for(Person person:personsList) {
             System.out.println(person);
         }
     }
+
 
     public void deletePerson()
     {
@@ -137,18 +150,65 @@ public class AddressBookMain {
         personsList.remove(personToDelete);
     }
 
+
+
+    public void addValues(HashMap<String,ArrayList<Person>> cityMap,String key,Person person)
+    {
+        ArrayList<Person> tempList=null;
+        if(cityMap.containsKey(key))
+        {
+            tempList=cityMap.get(key);
+            tempList.add(person);
+        }
+        else
+        {
+            tempList=new ArrayList<>();
+            tempList.add(person);
+        }
+        cityMap.put(key,tempList);
+    }
+
+    public void displayValues(HashMap<String,ArrayList<Person>> cityMap,String city)
+    {
+     Iterator it=cityMap.keySet().iterator();
+     ArrayList<Person> tempList=null;
+     while (it.hasNext())
+     {
+         String key=it.next().toString();
+         tempList=cityMap.get(city);
+         if(city.equals(key))
+         {
+             for(Person person:tempList)
+             {
+                 System.out.println(person);
+             }
+             break;
+         }
+     }
+
+    }
+
+
+
+
     public void viewPersonByCity()
     {
         System.out.println("enter city");
         String city=input.nextLine();
-        System.out.println(cityMap.get(city));
+        displayValues(cityMap,city);
     }
+
+
+
     public void viewPersonByState()
     {
         System.out.println("enter state");
         String state=input.nextLine();
-        System.out.println(stateMap.get(state));
+        displayValues(stateMap,state);
     }
+
+
+
 
     public static void main(String[] args)
     {
